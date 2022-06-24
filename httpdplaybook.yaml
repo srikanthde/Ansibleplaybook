@@ -1,0 +1,13 @@
+---
+ - hosts: all
+   become: true
+   tasks:
+     - name: install apache http server
+       yum: name=httpd update_cache=yes state=latest
+     - name: start http server
+       service: name=httpd enabled=yes state=started
+     - name: Insert index page
+       template:
+          src: index.html
+          dest: /var/www/html/index.html
+   
